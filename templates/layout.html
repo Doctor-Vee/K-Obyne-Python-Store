@@ -6,10 +6,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="authors" content="Victor Chinewubeze" />
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
   <title>K Obyne Store | {% block title %}{% endblock %}</title>
 </head>
 
 <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">AMS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        {% if session.user_id %}
+        <li class="nav-item">
+          <a class="nav-link" href="/article">Write an Article</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/view">My Articles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/viewall">All Articles</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" />
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+          Search
+        </button>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Register</a>
+        </li>
+        {% endif %}
+        {% if session.user_id %}
+        <a class="nav-link" href="/logout">Log out</a>
+        {% else %}
+        <a class="nav-link" href="/login">Log in</a>
+        {% endif %}
+      </form>
+    </div>
+  </nav>
+
   <main class="container p-2">
     {% block main %}{% endblock %}
   </main>
@@ -18,5 +58,10 @@
     <a href="/">K Obyne Store, Copyright &copy; 2019</a>
   </footer>
 </body>
+
+<script src="/static/js/jquery-3.4.1.min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/main.js"></script>
 
 </html>
